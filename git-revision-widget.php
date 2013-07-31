@@ -66,14 +66,12 @@ class GitRevisionWidget {
 	
 	public function display_revision_vision() {
 		$reference = $this->get_git_revision();
-		echo "<div>";
-		printf('Git repository at the %s branch (commit %s)', $reference['branch'], $reference['reference']);
-		echo "</div>";
+		printf('Git repository at the <strong>%s</strong> branch (commit <strong>%s</strong>)', $reference['branch'], $reference['reference']);
 	}
 	
 	public function add_dashboard_widget() {
-		wp_add_dashboard_widget('git_revision_dispay_widget', 'Git Revision', array(&$this, 'add_dashboard_widget'));
+		wp_add_dashboard_widget('git_revision_dispay_widget', 'Git Revision', array(&$this, 'display_revision_vision'));
 	}
 }
-new WPGitRevisionDisplay();
-register_activation_hook( __FILE__, array( 'WPGitRevisionDisplay', 'install' ) );
+new GitRevisionWidget();
+register_activation_hook( __FILE__, array( 'GitRevisionWidget', 'install' ) );
